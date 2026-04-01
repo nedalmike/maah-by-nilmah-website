@@ -14,58 +14,86 @@ const posts = [
 
 export default function StyledByYou() {
   return (
-    <section className="py-24 bg-cream overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
+    <section className="py-20 md:py-28 lg:py-36 px-6 lg:px-8 bg-cream">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-12 md:mb-16"
         >
-          <p className="text-gold text-xs tracking-[0.3em] uppercase mb-3">Community</p>
-          <h2 className="font-serif text-4xl md:text-5xl text-charcoal mb-4">Styled By You</h2>
-          <div className="w-16 h-px bg-gold mx-auto" />
+          <p className="label-editorial mb-4">Community</p>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal mb-5">
+            Styled By You
+          </h2>
+          <p className="text-sm text-stone font-sans max-w-md mx-auto">
+            Share how you wear MAAH — tag @maahbynilmah for a chance to be featured.
+          </p>
         </motion.div>
-      </div>
 
-      <div className="flex gap-4 px-6 overflow-x-auto pb-4 snap-x snap-mandatory">
-        {posts.map((post, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="flex-shrink-0 snap-center"
+        {/* Grid — 3x2 */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mb-12">
+          {posts.map((post, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <a
+                href="https://instagram.com/maahbynilmah"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block relative aspect-square overflow-hidden"
+              >
+                <div className="absolute inset-0 transition-transform duration-700 ease-out-expo group-hover:scale-[1.06]">
+                  <Image
+                    src={post.image}
+                    alt={post.label}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                </div>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/35 transition-all duration-500" />
+
+                {/* Icon + label */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-cream/15 backdrop-blur-sm border border-cream/25">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-cream">
+                      <rect x="2" y="2" width="20" height="20" rx="5" />
+                      <circle cx="12" cy="12" r="5" />
+                      <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" />
+                    </svg>
+                  </div>
+                  <p className="text-cream text-[10px] tracking-[0.2em] uppercase">{post.label}</p>
+                </div>
+              </a>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center">
+          <a
+            href="https://instagram.com/maahbynilmah"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary inline-flex items-center gap-3"
           >
-            <div className="w-56 h-56 md:w-72 md:h-72 relative group cursor-pointer overflow-hidden">
-              <Image
-                src={post.image}
-                alt={post.label}
-                fill
-                className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                sizes="288px"
-              />
-              <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-colors duration-300 flex flex-col items-center justify-center gap-2">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-cream opacity-0 group-hover:opacity-90 transition-opacity duration-300">
-                  <rect x="2" y="2" width="20" height="20" rx="5" />
-                  <circle cx="12" cy="12" r="5" />
-                  <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" />
-                </svg>
-                <p className="text-cream text-xs tracking-[0.2em] uppercase opacity-0 group-hover:opacity-80 transition-opacity duration-300">
-                  {post.label}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="text-center mt-10">
-        <a href="#" className="text-charcoal/60 text-sm tracking-[0.15em] hover:text-gold transition-colors duration-300">
-          Follow <span className="font-medium text-charcoal">@maahbynilmah</span>
-        </a>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="5" />
+              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" />
+            </svg>
+            Follow @maahbynilmah
+          </a>
+        </div>
       </div>
     </section>
   );

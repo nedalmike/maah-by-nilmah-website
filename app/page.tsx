@@ -14,8 +14,11 @@ export default function Home() {
       <Navbar />
       <Hero />
       <CollectionHighlights />
+      <div className="section-divider" />
       <NewArrivals />
+      <div className="section-divider" />
       <BrandStory />
+      <div className="section-divider" />
       <StyledByYou />
       <TrustBar />
       <Newsletter />

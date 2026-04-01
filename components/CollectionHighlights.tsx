@@ -4,54 +4,99 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const collections = [
-  { name: "Abayas", image: "/images/collection-abayas.png" },
-  { name: "Dresses", image: "/images/collection-dresses.png" },
-  { name: "Hijabs", image: "/images/collection-hijabs.png" },
-  { name: "Modest Sets", image: "/images/collection-sets.png" },
+  {
+    name: "Abayas",
+    image: "/images/collection-abayas.png",
+    tagline: "Timeless silhouettes, reimagined",
+    span: "col-span-1 md:col-span-2 md:row-span-2",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    name: "Dresses",
+    image: "/images/collection-dresses.png",
+    tagline: "Elevated for every moment",
+    span: "col-span-1",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    name: "Hijabs",
+    image: "/images/collection-hijabs.png",
+    tagline: "Statement pieces, subtle allure",
+    span: "col-span-1",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    name: "Modest Sets",
+    image: "/images/collection-sets.png",
+    tagline: "Curated sets with effortless polish",
+    span: "col-span-2",
+    aspect: "aspect-[4/3] md:aspect-[16/9]",
+  },
 ];
 
 export default function CollectionHighlights() {
   return (
-    <section id="collections" className="py-24 px-6 lg:px-8 bg-cream">
+    <section id="collections" className="py-20 md:py-28 lg:py-36 px-6 lg:px-8 bg-cream">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12 md:mb-16"
         >
-          <h2 className="font-serif text-4xl md:text-5xl text-charcoal mb-4">
-            The Collection
+          <p className="label-editorial mb-4">Collections</p>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal">
+            Shop by Category
           </h2>
-          <div className="w-16 h-px bg-gold mx-auto" />
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {/* Asymmetric grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {collections.map((item, i) => (
             <motion.div
               key={item.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className={item.span}
             >
-              <a href="#" className="group block relative aspect-[3/4] overflow-hidden cursor-pointer">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-charcoal/10 group-hover:from-charcoal/80 transition-all duration-500" />
-                <div className="absolute inset-0 flex flex-col items-center justify-end p-6 pb-10">
-                  <span className="font-serif text-2xl md:text-3xl text-cream tracking-[0.15em] transition-transform duration-500 group-hover:-translate-y-2">
-                    {item.name}
-                  </span>
-                  <span className="mt-2 text-xs tracking-[0.2em] uppercase text-cream/0 group-hover:text-cream/60 transition-all duration-500">
-                    Explore
-                  </span>
+              <a href="#" className="group block relative overflow-hidden h-full">
+                <div className={`relative ${item.aspect} h-full`}>
+                  <div className="absolute inset-0 transition-transform duration-700 ease-out-expo group-hover:scale-[1.04]">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                    />
+                  </div>
+
+                  {/* Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/10 to-transparent transition-all duration-500 group-hover:from-charcoal/60" />
+
+                  {/* Content */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-7">
+                    <div className="flex items-end justify-between">
+                      <div>
+                        <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-light text-cream leading-tight mb-1">
+                          {item.name}
+                        </h3>
+                        <p className="text-[10px] md:text-xs font-sans text-cream/50 tracking-wider hidden sm:block">
+                          {item.tagline}
+                        </p>
+                      </div>
+
+                      {/* Arrow reveal */}
+                      <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-cream/10 backdrop-blur-sm border border-cream/20 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-cream">
+                          <path d="M7 17L17 7M17 7H7M17 7v10" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </a>
             </motion.div>

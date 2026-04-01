@@ -16,10 +16,21 @@ const config: Config = {
         olive: "#6B6B4E",
         stone: "#8C8279",
         oat: "#E8DFD0",
+        ivory: "#FAFAF8",
+        fig: "#4A3728",
+        taupe: "#B5A99A",
       },
       fontFamily: {
-        serif: ["'Playfair Display'", "serif"],
-        sans: ["'DM Sans'", "sans-serif"],
+        serif: ["'Cormorant Garamond'", "Georgia", "serif"],
+        sans: ["'DM Sans'", "'Helvetica Neue'", "sans-serif"],
+      },
+      transitionTimingFunction: {
+        "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
+      },
+      transitionDuration: {
+        "400": "400ms",
+        "600": "600ms",
+        "700": "700ms",
       },
     },
   },

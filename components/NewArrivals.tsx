@@ -18,38 +18,51 @@ export default function NewArrivals() {
   return (
     <section
       id="new-arrivals"
-      className="py-24 px-6 lg:px-8"
-      style={{ background: "linear-gradient(180deg, #F5F0EB 0%, #E8DFD0 100%)" }}
+      className="py-20 md:py-28 lg:py-36 px-6 lg:px-8 bg-oat/40"
     >
       <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16"
         >
-          <p className="text-gold text-xs tracking-[0.3em] uppercase mb-3">Just Landed</p>
-          <h2 className="font-serif text-4xl md:text-5xl text-charcoal mb-4">New Arrivals</h2>
-          <div className="w-16 h-px bg-gold mx-auto" />
+          <div>
+            <p className="label-editorial mb-4">Just Landed</p>
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-charcoal">
+              New Arrivals
+            </h2>
+          </div>
+          <a
+            href="#"
+            className="inline-flex items-center gap-2 text-charcoal font-sans text-xs font-medium tracking-[0.18em] uppercase border-b border-charcoal pb-1 hover:text-stone hover:border-stone transition-colors duration-300"
+          >
+            View All
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
         </motion.div>
 
+        {/* Product grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {products.map((product, i) => (
             <motion.div
               key={product.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
               className="group cursor-pointer"
             >
-              <div className="relative aspect-[3/4] overflow-hidden mb-4 bg-oat">
+              <div className="relative aspect-[3/4] overflow-hidden mb-4 bg-oat/50">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-top transition-transform duration-700 ease-out-expo group-hover:scale-[1.04]"
                   sizes="(max-width: 768px) 50vw, 25vw"
                 />
                 {product.oldPrice && (
@@ -64,9 +77,11 @@ export default function NewArrivals() {
                 </div>
               </div>
 
-              <div className="text-center">
-                <h3 className="text-sm text-charcoal/80 mb-1.5 leading-snug">{product.name}</h3>
-                <div className="flex items-center justify-center gap-2">
+              <div>
+                <h3 className="text-sm text-charcoal/80 mb-1.5 leading-snug group-hover:text-charcoal transition-colors">
+                  {product.name}
+                </h3>
+                <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-charcoal">AED {product.price}</span>
                   {product.oldPrice && (
                     <span className="text-xs text-stone line-through">AED {product.oldPrice}</span>
@@ -77,18 +92,16 @@ export default function NewArrivals() {
           ))}
         </div>
 
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center mt-14"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-center mt-14 md:mt-20"
         >
-          <a
-            href="#"
-            className="inline-block px-10 py-4 border border-charcoal text-charcoal text-xs tracking-[0.2em] uppercase hover:bg-charcoal hover:text-cream transition-all duration-500"
-          >
-            View All
+          <a href="#" className="btn-outline">
+            View All Products
           </a>
         </motion.div>
       </div>
